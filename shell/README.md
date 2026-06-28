@@ -1,11 +1,26 @@
+# Señas App — Frontend
 
-  # Rediseño de página web
+Frontend de la app educativa de lengua de señas (React 18 + Vite 6 + Tailwind).
 
-  This is a code bundle for Rediseño de página web. The original project is available at https://www.figma.com/design/sJh6Oj863DrNEWE8648cYv/Redise%C3%B1o-de-p%C3%A1gina-web.
+## Requisitos
 
-  ## Running the code
+- Node.js 18+
+- Backend en ejecución (`modulo-palabras/`, puerto 3001)
 
-  Run `npm i` to install the dependencies.
+## Desarrollo local
 
-  Run `npm run dev` to start the development server.
-  
+```bash
+cp .env.example .env   # VITE_API_URL=http://localhost:3001/api
+npm install
+npm run dev
+```
+
+App en **http://localhost:5173/**
+
+## Estructura principal
+
+| Ruta | Descripción |
+|------|-------------|
+| `src/app/pages/` | Páginas públicas y admin |
+| `src/app/components/` | Componentes reutilizables |
+| `src/app/data/` | Datos estáticos (juegos, assets) |

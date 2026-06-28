@@ -7,7 +7,7 @@ SEÑAS APP — CONTEXTO COMPLETO PARA IA
    Solo el profesor/admin necesita autenticarse para gestionar contenido.
 
 2. ARQUITECTURA
-   Frontend (Rediseño): React 18 + Vite 6 + Tailwind v4 + shadcn/ui (Rediseño de página web/) → localhost:5173
+   Frontend: React 18 + Vite 6 + Tailwind v4 + shadcn/ui (shell/) → localhost:5173
    Backend:             Express 5 + MongoDB/Mongoose (modulo-palabras/) → localhost:3001
    BD:                  MongoDB Atlas (nube)
 
@@ -55,7 +55,7 @@ SEÑAS APP — CONTEXTO COMPLETO PARA IA
    │   ├── package.json
    │   └── src/app/                          ← Páginas, componentes, admin responsive
    │
-   └── Rediseño de página web/               ← Copia de trabajo local (mismo contenido que shell/)
+   └── shell/                                ← FRONTEND (única carpeta)
 
 4. MODELOS DE DATOS (MongoDB/Mongoose)
 
@@ -132,7 +132,7 @@ SEÑAS APP — CONTEXTO COMPLETO PARA IA
    5. Las stats se muestran en Inicio y FinSesion
    6. Profesor accede vía /admin-login → gestiona contenido y ve analíticas globales
 
-7. RUTAS DEL FRONTEND (Rediseño)
+7. RUTAS DEL FRONTEND (shell/)
 
    PÚBLICAS:
      /                          → Inicio (juegos disponibles, stats de sesión)
@@ -158,7 +158,7 @@ SEÑAS APP — CONTEXTO COMPLETO PARA IA
 
 8. COMPONENTES UI DISPONIBLES (shadcn/ui + Tailwind)
 
-   47 componentes en Rediseño de página web/src/app/components/ui/:
+   47 componentes en shell/src/app/components/ui/:
    button, input, select, textarea, label, card, dialog, dropdown-menu,
    form, progress, tabs, badge, table, scroll-area, separator, sheet,
    skeleton, switch, tooltip, alert, avatar, checkbox, popover, etc.
@@ -182,7 +182,7 @@ SEÑAS APP — CONTEXTO COMPLETO PARA IA
    - Seguridad: helmet, rate limiting, CORS, errorHandler, soft-delete
    - Validación FK, cascade soft-delete en categorías
 
-    ✅ FRONTEND (Rediseño de página web/) — FUNCIONAL
+    ✅ FRONTEND (shell/) — FUNCIONAL
     - 16 páginas conectadas a API real (ninguna usa mockData)
     - Inicio con categorías y stats de sesión desde API
     - Diccionario con búsqueda, filtros y paginación
@@ -348,13 +348,13 @@ SEÑAS APP — CONTEXTO COMPLETO PARA IA
     bitrate: "500k" (bitrate máximo controlado)
     Archivos modificados:
     - modulo-palabras/src/routes/upload.js:34-35
-    - Rediseño de página web/src/app/components/CloudinaryUpload.tsx:52-53
+    - shell/src/app/components/CloudinaryUpload.tsx:52-53
     Nota: Requiere reiniciar backend (npm run dev).
     Los 30 videos ya subidos (300 MB) se quedan como están.
 
 13. NOTAS IMPORTANTES
 
-    - El frontend activo es Rediseño de página web/ (no shell/)
+    - El frontend activo es shell/
     - La app es 100% pública para niños — no hay login de alumnos
     - Las sesiones son anónimas (sessionStorage + localStorage)
     - El profesor se autentica en /admin-login para gestionar contenido
@@ -362,7 +362,7 @@ SEÑAS APP — CONTEXTO COMPLETO PARA IA
     - Cloudinary: si no está configurado en .env, el upload muestra inputs URL manuales como fallback
     - Variables de entorno del frontend: VITE_API_URL=http://localhost:3001/api
     - El backend requiere MongoDB Atlas con IP en whitelist
-    - Para desarrollar: npm run dev en modulo-palabras/ y Rediseño de página web/
+    - Para desarrollar: npm run dev en modulo-palabras/ y shell/
     - Express 5: importación de router funciona distinto a Express 4
     - La ruta /reordenar/lote debe declararse ANTES que /:id en Express
     - soft-delete: deletedAt en todos los modelos, nunca delete físico

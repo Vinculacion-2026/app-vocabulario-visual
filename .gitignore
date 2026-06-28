@@ -27,5 +27,5 @@ imagenes/
 # Documentos personales / no del proyecto
 modulo-palabras/img/
 
-# Carpeta de trabajo local (el código activo está en shell/)
+# Copia duplicada del frontend (usar solo shell/)
 Rediseño de página web/

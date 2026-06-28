@@ -7,7 +7,7 @@ App educativa de lengua de señas con juegos interactivos (flashcards, quiz, mem
 | Carpeta | Descripción |
 |---------|-------------|
 | `modulo-palabras/` | Backend Express + MongoDB (API REST) |
-| `shell/` | Frontend React + Vite + Tailwind (app pública y admin) |
+| `shell/` | **Frontend** — única carpeta (React + Vite) |
 
 ## Requisitos
 
