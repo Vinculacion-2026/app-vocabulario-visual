@@ -72,7 +72,8 @@ router.post('/login', async (req, res, next) => {
 
     res.cookie('auth_token', token, getAuthCookieOptions());
 
-    res.json({ ok: true, rol: usuario.rol });
+    // Token en JSON para Safari/iOS cuando las cookies cross-origin no persisten.
+    res.json({ ok: true, rol: usuario.rol, token });
   } catch (err) {
     next(err);
   }

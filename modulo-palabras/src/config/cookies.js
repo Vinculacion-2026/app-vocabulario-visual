@@ -15,6 +15,7 @@ function getAuthCookieOptions() {
     httpOnly: true,
     sameSite,
     secure,
+    partitioned: sameSite === 'none',
     maxAge: EIGHT_HOURS_MS,
     path: '/',
   };

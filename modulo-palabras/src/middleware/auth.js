@@ -2,7 +2,14 @@ const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 
 const authMiddleware = (req, res, next) => {
-  const token = req.cookies.auth_token;
+  let token = req.cookies.auth_token;
+
+  if (!token) {
+    const header = req.headers.authorization;
+    if (header?.startsWith('Bearer ')) {
+      token = header.slice(7).trim();
+    }
+  }
 
   if (!token) {
     return res.status(401).json({ error: 'No autenticado' });

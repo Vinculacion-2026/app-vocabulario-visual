@@ -1,9 +1,39 @@
 const API = import.meta.env.VITE_API_URL || "http://localhost:3001/api";
+const AUTH_TOKEN_KEY = "senasapp_auth_token";
+
+function getAuthToken(): string | null {
+  try {
+    return sessionStorage.getItem(AUTH_TOKEN_KEY);
+  } catch {
+    return null;
+  }
+}
+
+function setAuthToken(token: string) {
+  try {
+    sessionStorage.setItem(AUTH_TOKEN_KEY, token);
+  } catch {
+    // sessionStorage no disponible
+  }
+}
+
+function clearAuthToken() {
+  try {
+    sessionStorage.removeItem(AUTH_TOKEN_KEY);
+  } catch {
+    // sessionStorage no disponible
+  }
+}
 
 async function fetchJSON(url: string, options?: RequestInit) {
+  const token = getAuthToken();
   const res = await fetch(url, {
     credentials: "include",
-    headers: { "Content-Type": "application/json", ...options?.headers },
+    headers: {
+      "Content-Type": "application/json",
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...options?.headers,
+    },
     ...options,
   });
   if (!res.ok) {
@@ -147,10 +177,12 @@ export async function obtenerStatsSesion(sessionId: string): Promise<SessionStat
 // ===== AUTH (admin) =====
 
 export async function loginAdmin(nombre: string, pin: string) {
-  return fetchJSON(`${API}/auth/login`, {
+  const data = await fetchJSON(`${API}/auth/login`, {
     method: "POST",
     body: JSON.stringify({ nombre, pin }),
-  });
+  }) as { ok: boolean; token?: string };
+  if (data.token) setAuthToken(data.token);
+  return data;
 }
 
 export async function checkAuth() {
@@ -158,7 +190,11 @@ export async function checkAuth() {
 }
 
 export async function logoutAdmin() {
-  return fetchJSON(`${API}/auth/logout`, { method: "POST" });
+  try {
+    await fetchJSON(`${API}/auth/logout`, { method: "POST" });
+  } finally {
+    clearAuthToken();
+  }
 }
 
 // ===== ADMIN CRUD =====
