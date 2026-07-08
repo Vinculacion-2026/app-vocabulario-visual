@@ -28,7 +28,7 @@ git remote add origin %REPO%
 
 echo.
 echo === Agregando archivos (sin node_modules ni .env) ===
-git add .gitignore README.md contexto.txt modulo-palabras shell
+git add .gitignore README.md contexto.txt modulo-palabras subir-a-github.bat front-nuevo
 git add -u
 
 echo.

@@ -1,4 +1,4 @@
-/** IDs y sexo de avatares — sincronizado con shell/src/avatares.js */
+/** IDs y sexo de avatares — sincronizado con front-nuevo/src/avatares.js */
 
 const SEXO_AVATAR = {
   avatar1: 'ambos', avatar2: 'ambos', avatar3: 'ambos', avatar4: 'ambos', avatar5: 'ambos',

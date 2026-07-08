@@ -21,11 +21,11 @@ npm-debug.log*
 .cursor/
 agent-transcripts/
 
-# Assets locales de referencia en la raíz (las del frontend están en shell/src/assets/imagenes/)
+# Assets locales de referencia en la raíz (las del frontend están en front-nuevo/src/assets/imagenes/)
 /imagenes/
 
 # Documentos personales / no del proyecto
 modulo-palabras/img/
 
-# Copia duplicada del frontend (usar solo shell/)
+# Copia duplicada del frontend (usar solo front-nuevo/)
 Rediseño de página web/

@@ -14,13 +14,6 @@ if (configurado) {
   });
 }
 
-router.get('/status', (req, res) => {
-  res.json({
-    configurado,
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME || null,
-  });
-});
-
 router.post('/signature', authMiddleware, requireProfesor, (req, res) => {
   if (!configurado) {
     return res.status(400).json({
@@ -28,16 +21,16 @@ router.post('/signature', authMiddleware, requireProfesor, (req, res) => {
     });
   }
 
-  const { folder = 'senasapp' } = req.body;
+  const { folder = 'senasapp', tipo = 'image' } = req.body;
   const timestamp = Math.round(Date.now() / 1000);
-  const params = {
-    timestamp,
-    folder,
-    quality: "auto:good",
-    bitrate: "500k",
-  };
+  const resourceType = tipo === 'video' ? 'video' : 'image';
 
-  const signature = cloudinary.utils.api_sign_request(params, process.env.CLOUDINARY_API_SECRET);
+  // Solo parámetros que Cloudinary incluye en la firma (folder + timestamp).
+  const params = { timestamp, folder };
+  const signature = cloudinary.utils.api_sign_request(
+    params,
+    process.env.CLOUDINARY_API_SECRET,
+  );
 
   res.json({
     signature,
@@ -45,6 +38,14 @@ router.post('/signature', authMiddleware, requireProfesor, (req, res) => {
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
     folder,
+    resource_type: resourceType,
+  });
+});
+
+router.get('/status', (req, res) => {
+  res.json({
+    configurado,
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME || null,
   });
 });
 

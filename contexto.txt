@@ -7,7 +7,7 @@ SEÑAS APP — CONTEXTO COMPLETO PARA IA
    Solo el profesor/admin necesita autenticarse para gestionar contenido.
 
 2. ARQUITECTURA
-   Frontend: React 18 + Vite 6 + Tailwind v4 + shadcn/ui (shell/) → localhost:5173
+   Frontend: React 18 + Vite 6 + Tailwind v4 + shadcn/ui (front-nuevo/) → localhost:5173
    Backend:             Express 5 + MongoDB/Mongoose (modulo-palabras/) → localhost:3001
    BD:                  MongoDB Atlas (nube)
 
@@ -50,12 +50,12 @@ SEÑAS APP — CONTEXTO COMPLETO PARA IA
    │           ├── resumenInicioAlumno.js    ← resumenCalidadFlashcards (global)
    │           └── ...
    │
-   ├── shell/                                ← FRONTEND ACTIVO (React 18 + Vite 6 + Tailwind v4)
+   ├── front-nuevo/                                ← FRONTEND ACTIVO (React 18 + Vite 6 + Tailwind v4)
    │   ├── .env.example
    │   ├── package.json
    │   └── src/app/                          ← Páginas, componentes, admin responsive
    │
-   └── shell/                                ← FRONTEND (única carpeta)
+   └── front-nuevo/                                ← FRONTEND (única carpeta)
 
 4. MODELOS DE DATOS (MongoDB/Mongoose)
 
@@ -132,7 +132,7 @@ SEÑAS APP — CONTEXTO COMPLETO PARA IA
    5. Las stats se muestran en Inicio y FinSesion
    6. Profesor accede vía /admin-login → gestiona contenido y ve analíticas globales
 
-7. RUTAS DEL FRONTEND (shell/)
+7. RUTAS DEL FRONTEND (front-nuevo/)
 
    PÚBLICAS:
      /                          → Inicio (juegos disponibles, stats de sesión)
@@ -158,7 +158,7 @@ SEÑAS APP — CONTEXTO COMPLETO PARA IA
 
 8. COMPONENTES UI DISPONIBLES (shadcn/ui + Tailwind)
 
-   47 componentes en shell/src/app/components/ui/:
+   47 componentes en front-nuevo/src/app/components/ui/:
    button, input, select, textarea, label, card, dialog, dropdown-menu,
    form, progress, tabs, badge, table, scroll-area, separator, sheet,
    skeleton, switch, tooltip, alert, avatar, checkbox, popover, etc.
@@ -182,7 +182,7 @@ SEÑAS APP — CONTEXTO COMPLETO PARA IA
    - Seguridad: helmet, rate limiting, CORS, errorHandler, soft-delete
    - Validación FK, cascade soft-delete en categorías
 
-    ✅ FRONTEND (shell/) — FUNCIONAL
+    ✅ FRONTEND (front-nuevo/) — FUNCIONAL
     - 16 páginas conectadas a API real (ninguna usa mockData)
     - Inicio con categorías y stats de sesión desde API
     - Diccionario con búsqueda, filtros y paginación
@@ -199,7 +199,7 @@ SEÑAS APP — CONTEXTO COMPLETO PARA IA
     - Diseño responsive mobile-first
     - Code splitting con lazy loading para navegación instantánea
 
-   ⏸️ SHELL (shell/) — LEGACY (no se usa, mantener como referencia)
+   ⏸️ SHELL (front-nuevo/) — LEGACY (no se usa, mantener como referencia)
    - Tenía login de alumnos, SM-2, gamificación, avatares, mascota SVG
    - Ya no es relevante para el nuevo flujo público
 
@@ -234,7 +234,7 @@ SEÑAS APP — CONTEXTO COMPLETO PARA IA
     [ ] Tests de integración
     [ ] Rotar credenciales de MongoDB y JWT (expuestas en historial git)
     [ ] Agregar IP actual a whitelist de MongoDB Atlas
-    [ ] Migrar shell/.env a .gitignore (actualmente EXPUESTO)
+    [ ] Migrar front-nuevo/.env a .gitignore (actualmente EXPUESTO)
 
 12. CAMBIOS RECIENTES (Junio 2026)
 
@@ -348,13 +348,13 @@ SEÑAS APP — CONTEXTO COMPLETO PARA IA
     bitrate: "500k" (bitrate máximo controlado)
     Archivos modificados:
     - modulo-palabras/src/routes/upload.js:34-35
-    - shell/src/app/components/CloudinaryUpload.tsx:52-53
+    - front-nuevo/src/app/components/CloudinaryUpload.tsx:52-53
     Nota: Requiere reiniciar backend (npm run dev).
     Los 30 videos ya subidos (300 MB) se quedan como están.
 
 13. NOTAS IMPORTANTES
 
-    - El frontend activo es shell/
+    - El frontend activo es front-nuevo/
     - La app es 100% pública para niños — no hay login de alumnos
     - Las sesiones son anónimas (sessionStorage + localStorage)
     - El profesor se autentica en /admin-login para gestionar contenido
@@ -362,9 +362,9 @@ SEÑAS APP — CONTEXTO COMPLETO PARA IA
     - Cloudinary: si no está configurado en .env, el upload muestra inputs URL manuales como fallback
     - Variables de entorno del frontend: VITE_API_URL=http://localhost:3001/api
     - El backend requiere MongoDB Atlas con IP en whitelist
-    - Para desarrollar: npm run dev en modulo-palabras/ y shell/
+    - Para desarrollar: npm run dev en modulo-palabras/ y front-nuevo/
     - Express 5: importación de router funciona distinto a Express 4
     - La ruta /reordenar/lote debe declararse ANTES que /:id en Express
     - soft-delete: deletedAt en todos los modelos, nunca delete físico
     - .env.example en modulo-palabras/ aún contiene credenciales reales (NO subir a git)
-    - shell/.env NO está en .gitignore (corregir)
+    - front-nuevo/.env NO está en .gitignore (corregir)
